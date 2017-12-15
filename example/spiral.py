@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from knit_display import Color, KnitDisplay
+from knit_display import Color, KnitDisplay, Orient
 from sense_hat import SenseHat
 from time import sleep
 
@@ -96,14 +96,15 @@ def main():
 
     for row in spiral_pat[::-1]:
         stitches = []
-        for stitch in row:
+        for stitch in row[::-1]:
             if stitch == front:
                 stitches.append("*")
             elif stitch == back:
                 stitches.append(" ")
         print(" | ".join(stitches))
 
-    display = KnitDisplay(spiral_pat, SENSE_HAT_DISPLAY)
+    display = KnitDisplay(spiral_pat, SENSE_HAT_DISPLAY,
+                          orient=Orient.RIGHT)
 
     @display.clear_when_done
     def run():
